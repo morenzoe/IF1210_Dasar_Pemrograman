@@ -5,7 +5,7 @@ konso:: <type_elemen>-> [<type_elemen>] -> [<type_elemen>]
     e o l -> l' -}
 
 --REALISASI
-konsoel = [e] ++ l
+konso e l = [e] ++ l
 
 konsDot:: [<type_elemen>]-> <type_elemen>-> [<type_elemen>]
 {-  konsDot(l,e) menghasilkan sebuah list dari l (list of
@@ -13,4 +13,4 @@ konsDot:: [<type_elemen>]-> <type_elemen>-> [<type_elemen>]
     l •e -> l' -}
 
 --REALISASI
-konsDotle = l ++ [e]
+konsDot l e = l ++ [e]
