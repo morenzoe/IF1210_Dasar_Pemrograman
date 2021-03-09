@@ -55,8 +55,8 @@ offsetList :: (Float->Float) -> (Float->Float) -> Float -> Float -> [Float]
 
 -- REALISASI
 offsetList f g a b
- | (a>b) = []
- | otherwise = konso (f a) (offsetList f g (g a) b)
+ | (a>b) = [] -- basis
+ | otherwise = konso (f a) (offsetList f g (g a) b) -- rekurens
 
 -- APLIKASI
 -- offsetList (\x->x) (\x->x+2) 1.2 7.1

@@ -47,12 +47,12 @@ sortList :: [Int] -> [Int]
 
 -- REALISASI
 isAllGanjil l
- | isEmpty l = True
- | otherwise = if (mod (head l) 2 /= 0) then isAllGanjil (tail l) else False
+ | isEmpty l = True -- basis
+ | otherwise = if (mod (head l) 2 /= 0) then isAllGanjil (tail l) else False  -- rekurens
 
 getSmallest l
- | isOneElmt l = head l
- | otherwise =
+ | isOneElmt l = head l -- basis
+ | otherwise =  -- rekurens
   let
    n = getSmallest (tail l)
   in
@@ -60,13 +60,13 @@ getSmallest l
    else head l
 
 delElement x l
- | isEmpty l = []
- | ((head l)==x) = tail l
+ | isEmpty l = [] -- basis
+ | ((head l)==x) = tail l  -- rekurens
  | otherwise = konso (head l) (delElement x (tail l))
 
 sortList l
- | isOneElmt l = l
- | otherwise = 
+ | isOneElmt l = l -- basis
+ | otherwise =  -- rekurens
   let
    elmtKecil = getSmallest l
   in

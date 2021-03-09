@@ -6,8 +6,8 @@ pangkat :: Int-> Int -> Int
 
 -- REALISASI
 pangkat a b
- | (b==0) = 1
- | otherwise = a * pangkat a (b-1)
+ | (b==0) = 1 -- basis
+ | otherwise = a * pangkat a (b-1) -- rekurens
 
 -- APLIKASI
 -- pangkat 2 5
