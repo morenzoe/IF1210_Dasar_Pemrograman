@@ -10,7 +10,7 @@ movePlayer :: Int -> Int -> Int
 
 -- REALISASI
 movePlayer a n
- | (n==0) = a -- basis
+ | (n==2) = nextSpace (nextSpace a) -- basis
  | otherwise = movePlayer (nextSpace a) (n-1) -- rekurens
 
 -- APLIKASI

@@ -16,6 +16,7 @@ prevDetik j m d
  | (j==0)&&(m==0)&&(d==0) = (23, 59, 59)
  | (m==0)&&(d==0) = (j-1, 59, 59)
  | (d==0) = (j, m-1, 59)
+ | otherwise = (j, m, d-1)
 
 -- APLIKASI
 -- prevDetik 23 59 59
