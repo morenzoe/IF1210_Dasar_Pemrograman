@@ -55,21 +55,17 @@ getSmallest :: [Int] -> Int
    suatu list of integer li. 
    Prekondisi: li tidak kosong. -}
 
-sortList :: [Int] -> [Int]
-{- sortList li akan mengembalikan li yang terurut tidak mengecil. -}
-
-splitList :: [Int] -> ([Int], [Int])
-{- splitList li akan membagi list of integer li menjadi dua list of integer 
-   dengan jumlah elemen yang sama. Jika jumlah elemen li ganjil, list of 
-   integer pertama akan 1 elemen lebih banyak. -}
-
-getHeadl1 :: ([Int],[Int]) -> [Int]
-{- getHead (l1,l2) akan mengambil elemen pertama l1. -}
-
-getLastl2 :: ([Int],[Int]) -> [Int]
-{- getLast (l1,l2) akan mengambil elemen terakhir l2. -}
+getBiggest :: [Int] -> Int
+{- getSmallest li akan mengembalikan elemen integer terbesar dari
+   suatu list of integer li. 
+   Prekondisi: li tidak kosong. -}
 
 -- REALISASI FUNGSI ANTARA
+delElmt n li
+ | isEmpty li = li -- basis list kosong
+ | ((head li) == n) = tail li -- basis n adalah elemen pertama li
+ | otherwise = konso (head li) (delElmt n (tail li)) -- rekurens
+
 getSmallest li
     | isOneElmt li = head li -- basis
     | otherwise = -- rekurens
@@ -79,35 +75,14 @@ getSmallest li
             if ((head li) < n) then head li
             else n
 
-delElmt n li
- | isEmpty li = li -- basis list kosong
- | ((head li) == n) = tail li -- basis n adalah elemen pertama li
- | otherwise = konso (head li) (delElmt n (tail li)) -- rekurens
-
-sortList li
- | isEmpty li = [] -- basis
- | otherwise =  -- rekurens
-        let
-            n = getSmallest li
-        in
-            konso n (sortList (delElmt n li))
-
-splitList l
-    | isEmpty l = ([], []) -- basis kedua list kosong
-    | isOneElmt l = (l, []) -- basis list terdiri dari satu elemen
+getBiggest li
+    | isOneElmt li = head li -- basis
     | otherwise = -- rekurens
         let
-            (lDepan, lBelakang) = splitList (tail (init l))
+            n = getBiggest (tail li) 
         in
-            (konso (head l) lDepan, konsDot lBelakang (last l))
-
-getHeadl1 (l1,l2)
- | isEmpty l1 = [] -- basis
- | otherwise = konso (head l1) (getLastl2 (tail l1,l2)) -- rekurens
-
-getLastl2 (l1,l2)
- | isEmpty l2 = [] -- basis
- | otherwise = konso (last l2) (getHeadl1 (l1,init l2)) -- rekurens
+            if ((head li) > n) then head li
+            else n
 
 -- DEFINISI DAN SPESIFIKASI 
 alternateSort :: [Int] -> [Int]
@@ -115,7 +90,17 @@ alternateSort :: [Int] -> [Int]
    terkecil, terbesar, terkecil, terbesar, dan seterusnya. -}
 
 -- REALISASI
-alternateSort li = getHeadl1 (splitList (sortList li))
+alternateSort li 
+ | (isEmpty li) = []
+ | (isOneElmt li) = li
+ | otherwise = let
+                max = getBiggest li
+                min = getSmallest li
+               in
+                let
+                 delLi = delElmt max (delElmt min li)
+                in
+                 konso min (konso max (alternateSort delLi))
 
 -- APLIKASI
 -- alternateSort [9,10,11,12]
