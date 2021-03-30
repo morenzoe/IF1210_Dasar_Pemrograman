@@ -22,21 +22,21 @@ def catat_baki(nomor):
 # harga, jumlah : int
 
 # ALGORITMA
-  global jumlah_minuman                                                         # variabel jumlah_minum sudah didefinisikan sebagai variabel global sebagai integer
-  while True:                                                                           # loop validasi harga
-    harga = int(input("Harga barang baki "+str(nomor)+": "))      # menerima input harga berupa integer
+  global jumlah_minuman                                         # variabel jumlah_minum sudah didefinisikan sebagai variabel global sebagai integer
+  while True:                                                   # loop validasi harga
+    harga = int(input("Harga barang baki "+str(nomor)+": "))	# menerima input harga berupa integer
     if harga>=5000 and harga<=20000 and harga%5000==0:            
-      break                                                                               # harga valid
+      break                                                     # harga valid
     else:
-      print("Masukan harga tidak sesuai.")                                   # harga tidak valid
-  while True:                                                                           # loop v alidasi jumlah
-    jumlah = int(input("Jumlah barang baki "+str(nomor)+": "))   # menerima input jumlah berupa integer
+      print("Masukan harga tidak sesuai.")                      # harga tidak valid
+  while True:                                                   # loop v alidasi jumlah
+    jumlah = int(input("Jumlah barang baki "+str(nomor)+": "))  # menerima input jumlah berupa integer
     if jumlah>=0 and jumlah<=10:
-      jumlah_minuman+=jumlah                                                # menambahkan variabel global jumlah_minuman dengan jumlah suatu baki
-      break                                                                               # jumlah valid
+      jumlah_minuman+=jumlah                                    # menambahkan variabel global jumlah_minuman dengan jumlah suatu baki
+      break                                                     # jumlah valid
     else:
-      print("Masukan jumlah tidak sesuai.")                                 # jumlah tidak valid
-  return (nomor, harga, jumlah)                                                # mengembalikan nomor, harga, dan jumlah sebagai baki
+      print("Masukan jumlah tidak sesuai.")                     # jumlah tidak valid
+  return (nomor, harga, jumlah)                                 # mengembalikan nomor, harga, dan jumlah sebagai baki
 
 # ALGORITMA PROGRAM UTAMA
 # Modus Loading
