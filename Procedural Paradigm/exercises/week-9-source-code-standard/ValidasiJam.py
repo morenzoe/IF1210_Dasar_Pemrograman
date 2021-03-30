@@ -13,7 +13,7 @@
 #  h, m, s : int
 
 # ALGORITMA PROGRAM UTAMA
-h = int(input("Jam: "))                                                 # membaca input
+h = int(input("Jam: "))                                                 # menerima input dari keyboard
 m = int(input("Menit: "))
 s = int(input("Detik: "))
 
@@ -37,7 +37,7 @@ KAMUS
    h, m, s : integer
 
 ALGORITMA
-   input(h,m,s) { membaca input }
+   input(h,m,s) { menerima input dari keyboard }
    if (h >= 0 and h <= 23 and m >= 0 and m <= 59 and s >= 0 and s <= 59) then { validasi input }
       J.HH <- h { membentuk variabel J bertype jam }
       J.MM <- m

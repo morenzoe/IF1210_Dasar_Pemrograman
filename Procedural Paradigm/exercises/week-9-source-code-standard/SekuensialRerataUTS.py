@@ -32,7 +32,7 @@ KAMUS
    Sum : integer { jumlah }
 
 ALGORITMA
-   input("Nilai UTS = ", UTS) { First Element }
+   input(UTS) { menerima input dari keyboard. First Element }
    if (UTS < 0 or UTS > 100) then
       output("Tidak ada data") { kasus kosong }
    else { 0 ≤ UTS ≤ 100 }
@@ -40,7 +40,7 @@ ALGORITMA
       repeat
          Sum <- Sum + UTS
          i <- i + 1
-         input("Nilai UTS = ", UTS) { Next Elmt }
+         input(UTS) { menerima input dari keyboard. Next Elmt }
       until (UTS < 0 or UTS > 100)
       output("Nilai rata-rata UTS =  ", Sum/i) { Terminasi }
 '''

@@ -11,7 +11,7 @@
 
 # ALGORITMA PROGRAM UTAMA
 
-UTS = int(input("Nilai UTS = ")) # First Element
+UTS = int(input("Nilai UTS = ")) # menerima input dari keyboard. First Element
 if(UTS < 0 or UTS > 100):
   print("Data kosong, tidak ada nilai rata-rata !") # kasus kosong
 else: # 0 ≤ UTS ≤ 100
@@ -19,7 +19,7 @@ else: # 0 ≤ UTS ≤ 100
   Sum = 0 # Inisialisasi
   while (UTS >= 0 and UTS <= 100):
       while True:
-        UAS = int(input("Nilai UAS = "))
+        UAS = int(input("Nilai UAS = ")) # menerima input dari keyboard
         if (UAS >= 0 and UAS <= 100):
           break
         else:
@@ -29,7 +29,7 @@ else: # 0 ≤ UTS ≤ 100
       Sum = Sum + NA
       i = i + 1
       print("Nilai akhir pelajaran", i, "=", NA)
-      UTS = int(input("Nilai UTS = ")) # Next Elmt
+      UTS = int(input("Nilai UTS = ")) # menerima input dari keyboard. Next Elmt
   print("Nilai rata-rata dari", i, "pelajaran adalah =", Sum/i)
  
  # NOTASI ALGORITMIK
@@ -44,14 +44,14 @@ KAMUS
    Sum : integer { jumlah }
 
 ALGORITMA
-   input("Nilai UTS = ", UTS) { First Element }
+   input(UTS) { menerima input dari keyboard. First Element }
    if(UTS < 0 or UTS > 100) then
       output("Data kosong, tidak ada nilai rata-rata !") { kasus kosong }
    else {} 0 ≤ UTS ≤ 100 }
       i <- 0; Sum <- 0 { Inisialisasi }
       repeat
          iterate
-            input("Nilai UAS = ", UAS)
+            input(UAS) { menerima input dari keyboard }
          stop (UAS >= 0 and UAS <= 100)
             output("Ulangi input nilai (0..100)!")
          { Proses data valid }
@@ -59,7 +59,7 @@ ALGORITMA
          Sum <- Sum + NA
          i <- i + 1
          output("Nilai akhir pelajaran ", i, " = ", NA)
-         input("Nilai UTS = ", UTS) { Next Elmt }
+         input(UTS) { menerima input dari keyboard Next Elmt }
       until(UTS < 0 or UTS > 100)
       output("Nilai rata-rata dari ", i, " pelajaran adalah = ", Sum/i)
 '''

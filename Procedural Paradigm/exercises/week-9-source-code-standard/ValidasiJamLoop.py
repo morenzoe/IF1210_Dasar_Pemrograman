@@ -14,7 +14,7 @@
 
 # ALGORITMA PROGRAM UTAMA
 while True:
-  h = int(input("Jam: "))                                                 # membaca input
+  h = int(input("Jam: "))                                                 # menerima input dari keyboard
   m = int(input("Menit: "))
   s = int(input("Detik: "))
 
@@ -40,7 +40,7 @@ KAMUS
 
 ALGORITMA
   iterate
-    input(h,m,s)
+    input(h,m,s) { menerima input dari keyboard }
   stop (h >= 0 and h <= 23 and m >= 0 and m <= 59 and s >= 0 and s <= 59)
     output("Tidak dapat membentuk jam")
   { Proses data valid }
