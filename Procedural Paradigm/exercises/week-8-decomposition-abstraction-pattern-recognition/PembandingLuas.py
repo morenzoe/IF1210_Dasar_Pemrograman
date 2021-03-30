@@ -159,3 +159,75 @@ ALGORITMA
            { luas  = |x1-x2| * |y1-y2| }
    -> L
 '''
+
+# PEMBAHASAN NOTASI ALGORITMIK
+'''
+Program LuasSegiEmpat
+{ Menerima masukan 2 buah segiempat S1 dan S2 (masukan hars divalidasi terlebih dahulu) }
+{ Selanjutnya program membandingkan luas segiempat S1 dan S2 }
+
+KAMUS
+   type Titik : < X, Y : integer >
+   type SegiEmpat L < TAwal, TAkhir : Titik >
+
+   { Variabel }
+   S1, S2 : SegiEmpat
+
+   { Fungsi/Prosedur }
+   procedure BacaTitik (output T : Titik)
+   { I.S.: T sembarang, F.S.: T terdefinisi }
+   procedure BacaSegiEmpat (output S : SegiEmpat)
+   { I.S.: S sembarang, F.S.: S terdefinisi dengan TAwal dan TAkhir yang tepat }
+   { Asumsi Proses: Membaca masukan TAwal dan TAkhir sampai didapatkan nilai yang tepat }
+   function IsSegiEmpatValid (TAwal, TAkhir : Titik) -> boolean
+   { Menghasilkan true jika TAwal dan TAkhir dapat membentuk segiempat yang tepat,
+     yaitu tidak memiliki nilai x atau y yang sama }
+   function LuasSegiEmpat (S : SegiEmpat) -> integer
+   { Menghasilkan luas perhitungan segiempat S }
+
+ALGORITMA
+   { Input segiempat }
+   BacaSegiEmpat(S1)
+   BacaSegiEmpat(S2)
+
+   { Perbandingan Luas }
+   depend on (S1,S2) :
+      LuasSegiEmpat(S1) > LuasSegiEmpat(S2)
+         output("SegiEmpat pertama lebih luas daripada SegiEmpat kedua")
+      LuasSegiEmpat(S1) < LuasSegiEmpat(S2)
+         output("SegiEmpat kedua lebih luas daripada SegiEmpat pertama")
+      LuasSegiEmpat(S1) = LuasSegiEmpat(S2)
+         output("Luas SegiEmpat sama")
+
+{ REALISASI FUNGSI/PROSEDUR }
+procedure BacaTitik (output T : Titik)
+{ I.S.: T sembarang, F.S.: T terdefinisi }
+KAMUS LOKAL
+   -
+ALGORITMA
+   input(T.x)
+   input(T.y)
+
+procedure BacaSegiEmpat (output S : SegiEmpat)
+{ I.S.: S sembarang, F.S.: S terdefinisi dengan TAwal dan TAkhir yang tepat }
+{ Asumsi Proses: Membaca masukan TAwal dan TAkhir sampai didapatkan nilai yang tepat }
+KAMUS LOKAL
+   T1, T2 : Titik
+ALGORITMA
+   { Menggunakan skema validasi }
+   iterate
+      BacaTitik(T1) { Baca titik awal }
+      BacaTitik(T2) { Baca titik akhir }
+   stop (IsSegiEmpatValid(T1,T2))
+      output("Titik-titik tidak dapat membentuk segi empat. Ulangi.")
+   { Assign T1 sebagai TAwal dan T2 sebagai TAkhir }
+   S.TAwal <- T1
+   S.TAkhir <- T2
+
+function LuasSegiEmpat (S : SegiEmpat) -> integer
+{ Menghasilkan luas perhitungan segiempat S }
+KAMUS LOKAL
+   -
+ALGORITMA
+   -> abs(TAwal.x - TAkhir.x) * abs(TAwal.y - TAkhir.y)
+'''
