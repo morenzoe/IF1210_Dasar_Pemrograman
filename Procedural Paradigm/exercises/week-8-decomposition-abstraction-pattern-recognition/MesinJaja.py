@@ -134,23 +134,23 @@ KAMUS
    { Fungsi/Prosedur }
    procedure Loading
    { I.S.: arrBaki dan NBaki sembarang,
-      F.S.: arrBaki terdefinisi isinya pertam kali dengan NBaki terdefinisi
-              sebagai banyaknya baki di arrBaki yang terpakai }
+     F.S.: arrBaki terdefinisi isinya pertam kali dengan NBaki terdefinisi
+           sebagai banyaknya baki di arrBaki yang terpakai }
    { Proses: membaca masukan berapa baki yang dipakai, selanjutnay untuk tiap baki
-                  dibaca harga dan jumlah barang dengan prosedur SetUpBaki }
+             dibaca harga dan jumlah barang dengan prosedur SetUpBaki }
    procedure SetUpBaki (input no_baki : integer, output B : baki)
    { I.S.: no_baki yang akan di-set-up terdefinisidan diasumsikan tepat, yaitu 1 s.d. 40
-      F.S.: Baki B terdefinisi dengan nomor_baki = no_baki dan data baki yang tepat }
+     F.S.: Baki B terdefinisi dengan nomor_baki = no_baki dan data baki yang tepat }
    { Proses: Meng-assign nomor_baki dengan no_baki dan memvalidasi harga dan
-                  jumlah barang sesuai definisi tipe baki. Validasi data baki menggunakan
-                  fungsi IsValidBaki. }
+             jumlah barang sesuai definisi tipe baki. Validasi data baki menggunakan
+             fungsi IsValidBaki. }
    function IsValidBaki (no_baki, harga, jumlah : integer) -> boolean
    { Menghasilkan true jika no_baki, harga, dan jumlah membentuk data baki yang
-      valid sesuai definisi type baki }
+     valid sesuai definisi type baki }
    procedure Operation (input no_baki : integer)
    { I.S.: no_baki yang akan dibeli terdefinisi dan <= NBaki. }
    { F.S.: Jumlah barang pada baki no_bakipada arrBaki berkurang 1 jika jumlah
-               barang > 0. Jika tidak, maka jumlah barang tetap. }
+           barang > 0. Jika tidak, maka jumlah barang tetap. }
    function IsSoldOut -> boolean
    { Menghasilkan true jika semua baki pada arrBaki telah kosong }
    
