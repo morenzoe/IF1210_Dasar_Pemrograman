@@ -10,21 +10,31 @@ type TMahasiswa : < NIM : string;
 type TabMhs : < TM : array [1..Neff] of TMahasiswa;
                 Neff : integer[0..NMax] { nilai efektif TabMhs } >
 
-ALGORITMA
- procedure UrutTabMhs (input/output TMhs : TabMhs)
+procedure UrutTabMhs (input/output TMhs : TabMhs)
 { I.S. TMhs sudah terdefinisi
   F.S. TMhs terurut mengecil pada atribut Nilai }
-if (TMhs.Neff > 1) then
-   Pass traversal [1..TMhs.Neff-1]
-      { Menentukan indeks elemen minimum [Pass..TMhs.Neff] }
-      IMin <- Pass
-      i traversal [Pass+1..TMhs.Neff]
-         if (TMhs.TM[IMin].Nilai < TMhs.TM[i].Nilai) then         
-            IMin <- i
-      { TMhs.TM[IMin].Nilai adalah minimum TMhs.TM[Pass..N].Nilaii }
-      { Tukar TMhs.TM[IMin].Nilai dengan TMhs.TM[Pass].Nilai }
-      Temp <- TMhs.TM[IMin].Nilai
-      TMhs.TM[IMin].Nilai <- TMhs.TM[Pass].Nilai
-      TMhs.TM[Pass].Nilai <- Temp
-      { TMhs.TM[1..Pass].Nilai terurut TMhs.TM[1].Nilai <= TMhs.TM[2].Nilai <= ... <= TMhs.TM[Pass].Nilai }
-{Seluruh tabel terurut, TMhs.TM[1].Nilai <= TMhs.TM[2].Nilai <= ... <= TMhs.TM[TMhs.Neff].Nilai }
+
+KAMUS LOKAL
+   i : integer
+﻿﻿﻿   Pass : integer
+   Temp : TMahasiswa
+   IMax : integer
+
+ALGORITMA
+   if (TMhs.Neff > 1) then
+      Pass traversal [1..TMhs.Neff-1]
+      { Menentukan indeks elemen maksimum[Pass..TMhs.Neff] }
+      IMax <- Pass
+      i <- Pass + 1
+      while (i <= TMhs.Neff) do
+         if (TMhs.TM[IMax].Nilai < TMhs.TM[i].Nilai) then
+            IMax <- i
+         i <- i + 1
+      { TMhs.TM[IMax].Nilai adalah maksimum TMhs.TM[Pass..TMhs.Neff].Nilai }
+      { Tukar TMhs.TM[IMax] dengan TMhs.TM[Pass] }
+         if (Pass ≠ IMax) then
+            Temp  <- TMhs.TM[IMax]
+            TMhs.TM[IMax] <- TMhs.TM[Pass]
+            TMhs.TM[Pass] <- Temp
+      { TMhs.TM[1..Pass].Nilai terurut TMhs.TM[1].Nilai >= TMhs.TM[2].Nilai >= ... >= TMhs.TM[Pass].Nilai }
+   { Seluruh tabel terurutberdasarkan elemen Nilai: TMhs[1].Nilai >= TMhs[2].Nilai>= ...>=TMhs[TMhs.Neff].Nilai }
