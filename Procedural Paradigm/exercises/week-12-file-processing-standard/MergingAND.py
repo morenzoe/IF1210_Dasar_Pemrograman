@@ -10,13 +10,11 @@ KAMUS
    type valtype : integer
    type rekamanMHS : < NIM : keytype, nilai : valtype>
    constant mark : rekamanMHS = <99999999, 99>
-   RekInMHS : rekamanMHS
-   RekOutMHS : rekamanMHS
    DataIn1Mhs : SEQFILE of
-                (*) RekMHS : rekamanMHS
+                (*) RekIn1MHS : rekamanMHS
                 (1) mark
    DataIn2Mhs : SEQFILE of
-                (*) RekMHS : rekamanMHS
+                (*) RekIn2MHS : rekamanMHS
                 (1) mark
    DataOutMhs : SEQFILE of
                 (*) RekMHS : rekamanMHS
@@ -26,42 +24,42 @@ KAMUS
 
 ALGORITMA
    assign (DataIn1MHS, "rekmhs1.dat")
-   open (DataInMHS, RekIn1MHS)
+   open (DataInMHS, RekIn1MHS) { First-Elmt }
    assign (DataIn2MHS, "rekmhs2.dat")
-   open (DataInMHS, RekIn2MHS)
+   open (DataInMHS, RekIn2MHS) { First-Elmt }
    assign (DataOutMHS, "rekmhs.dat")
    rewrite (DataOutMHS)
 
-   while (EOP(RekIn1MHS)) or (EOP(RekIn2MHS)) do
+   while not (EOP(RekIn1MHS)) or (EOP(RekIn2MHS)) do
       if (RekIn1MHS.NIM <= RekIn2MHS.NIM) then
          write (DataOutMHS, RekIn1MHS)
-         read (DataIn1MHS, RekIn1MHS)
+         read (DataIn1MHS, RekIn1MHS) { Next-Elmt }
       else { RekIn1MHS.NIM > RekIn2MHS.NIM }
          write (DataOutMHS, RekIn2MHS)
-         read (DataIn2MHS, RekIn2MHS)
-   { EOP(RekIn1MHS)) = false or EOP(RekIn2MHS) = false }
+         read (DataIn2MHS, RekIn2MHS) { Next-Elmt }
+   { EOP(RekIn1MHS)) or EOP(RekIn2MHS) }
 
    { Menyalin sisa data pada DataIn1MHS }
-   while (EOP(RekIn1MHS)) do
+   while not (EOP(RekIn1MHS)) do
          write (DataOutMHS, RekIn1MHS)
-         read (DataIn1MHS, RekIn1MHS)
-   { Akhir DataIn1MHS EOP(RekIn1MHS)) = false }
+         read (DataIn1MHS, RekIn1MHS) { Next-Elmt }
+   { Akhir DataIn1MHS EOP(RekIn1MHS)) }
 
    { Menyalin sisa data pada DataIn2MHS }
-   while (EOP(RekIn2MHS)) do
+   while not (EOP(RekIn2MHS)) do
          write (DataOutMHS, RekIn2MHS)
-         read (DataIn2MHS, RekIn2MHS)
-   { Akhir DataIn2MHS EOP(RekIn2MHS)) = false }
+         read (DataIn2MHS, RekIn2MHS) { Next-Elmt }
+   { Akhir DataIn2MHS EOP(RekIn2MHS)) }
+    
+   { Tulis mark }
+   write (DataOutMHS, mark)
 
-   close (DataIn1MHS)
+   close (DataOutMHS) { memastikan data baru berhasil terbentuk }
    close (DataIn2MHS)
-   close (DataOutMHS)
+   close (DataIn1MHS)
 
 { REALISASI FUNGSI }
    function EOP (rek : rekamanMHS) -> boolean
    { menghasilkan true jika pembacaan rek = Mark }
-     if rek.NIM = 99999999 and rek.nilai = 99 then
-         -> false
-      else
-         -> true
+     -> (rek.NIM = 99999999) and (rek.nilai = 99)
 '''

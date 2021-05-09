@@ -8,29 +8,33 @@ Program TotalBarang
 KAMUS
    type keytype : string
    type valtype : integer
-   type penjualan : <Kategori : string,
+   type penjualan : <Kategori : keytype,
                      KdBarang : string,
-                     Jumlah : integer>
+                     Jumlah : valtype>
    ArsipBarang : SEQFILE of
                  (*) sale : penjualan
                  (1) mark : penjualan { sudah terdefinisi }
    CurrentBarang : keytype
-   SumJum : valtype
+   SumJum : integer
    function EOP (rek : rekamanMHS) -> boolean
    { menghasilkan true jika pembacaan rek = Mark }
 
 ALGORITMA
    assign (ArsipBarang, "datapenjualan.dat")
-   open (ArsipBarang, sale)
-   while (EOP(sale)) do
+   open (ArsipBarang, sale) { First-Elmt }
+   
+   while not (EOP(sale)) do
       SumJum <- 0
       CurrentBarang <- sale.Kategori
       repeat
          SumJum <- SumJum + sale.Jumlah
-         read (ArsipBarang, sale)
-      until (CurrentBarang != sale.Kategori)
+         read (ArsipBarang, sale) { Next-Elmt }
+      until (sale.Kategori /= CurrentBarang)
       output(CurrentBarang, " ", SumJum)
-   close (ArsipBarang, sale)
+      { Terminasi kategori }
+   { EOP(sale) }
+   
+   close (ArsipBarang)
 
 { REALISASI FUNGSI }
 { sudah terdefinisi }

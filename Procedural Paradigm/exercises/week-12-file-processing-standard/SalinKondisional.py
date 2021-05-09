@@ -12,32 +12,31 @@ KAMUS
    constant mark : rekamanMHS = <"99999999", 99>
    RekInMHS : rekamanMHS
    DataInMhs : SEQFILE of
-               (*) RekMHS : rekamanMHS
+               (*) RekInMHS : rekamanMHS
                (1) mark
    DataOutMhs : SEQFILE of
-               (*) RekMHS : rekamanMHS
+               (*) RekInMHS : rekamanMHS
                (1) mark
    function EOP (rek : rekamanMHS) -> boolean
    { menghasilkan true jika pembacaan rek = mark }
 
 ALGORITMA
    assign (DataInMHS, "rekaman.dat")
-   open (DataInMHS, RekInMHS)
+   open (DataInMHS, RekInMHS) { First-Elmt }
    assign (DataOutHS, "rekaman1.dat")
    rewrite (DataOutMHS)
-   while (EOP(RekInMHS)) do
+   
+   while not (EOP(RekInMHS)) do
       if (RekInMHS.nilai >= 80) then
          write (DataOutMHS, RekInMHS)
-      read (DataInMHS, RekInMHS)
-   until (EOP(RekInMHS))
+      read (DataInMHS, RekInMHS) { Next-Elmt }
+   { EOP(RekInMHS) }
+   
    close (DataInMHS)
    close (DataOutMHS)
 
 { REALISASI FUNGSI }
    function EOP (rek : rekamanMHS) -> boolean
    { menghasilkan true jika pembacaan rek = Mark }
-      if rek.NIM = "99999999" and rek.nilai = 99 then
-         -> false
-      else
-         -> true
+      -> (rek.NIM = "99999999") and (rek.nilai = 99)
 '''
